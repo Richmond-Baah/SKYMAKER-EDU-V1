@@ -1,0 +1,13 @@
+# Node / frontend
+node_modules/
+drone-transmitter-ui(1)/
+
+# Build artifacts
+build/
+*.elf
+*.bin
+*.map
+*.o
+*.log
+*.env
+*.ninja
