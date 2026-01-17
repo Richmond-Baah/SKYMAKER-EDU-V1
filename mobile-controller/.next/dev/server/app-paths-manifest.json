@@ -1,0 +1,5 @@
+{
+  "/api/drone/control/route": "app/api/drone/control/route.js",
+  "/api/drone/telemetry/route": "app/api/drone/telemetry/route.js",
+  "/page": "app/page.js"
+}

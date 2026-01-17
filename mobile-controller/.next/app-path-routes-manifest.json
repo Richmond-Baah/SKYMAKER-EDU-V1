@@ -1,0 +1,8 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/api/drone/control/route": "/api/drone/control",
+  "/api/drone/telemetry/route": "/api/drone/telemetry",
+  "/favicon.ico/route": "/favicon.ico",
+  "/page": "/"
+}
