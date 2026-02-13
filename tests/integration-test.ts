@@ -27,9 +27,10 @@ async function testControl() {
         console.log("Response:", data);
         if (data.success) console.log("✅ Control API test PASSED");
         else console.log("❌ Control API test FAILED");
-    } catch (e) {
-        console.log("❌ Control API test FAILED (Is server running?):", e.message);
-    }
+    }catch (e) {
+    const message = e instanceof Error ? e.message : 'Unknown error';
+    console.log("❌ Control API test FAILED (Is server running?):", message);
+}
 }
 
 async function testTelemetry() {
@@ -53,3 +54,4 @@ async function runTests() {
 }
 
 runTests();
+
