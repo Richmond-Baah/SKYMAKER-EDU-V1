@@ -5,7 +5,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 
 interface JoystickControlProps {
   isFlying: boolean
-  onTaskStart: () => void
 }
 
 export default function JoystickControl({ isFlying }: JoystickControlProps) {

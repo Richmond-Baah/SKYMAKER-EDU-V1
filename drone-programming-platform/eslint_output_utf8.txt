@@ -1,0 +1,27 @@
+﻿
+C:\Users\3FARMATE ROBOTICS\Downloads\ESP-Drone-main\ESP-Drone-main\Firmware\esp-drone\drone-programming-platform\components\CommunityMissionBuilder.tsx
+  46:6  warning  React Hook React.useEffect has a missing dependency: 'loadMissions'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\3FARMATE ROBOTICS\Downloads\ESP-Drone-main\ESP-Drone-main\Firmware\esp-drone\drone-programming-platform\components\SwarmTelemetry.tsx
+  25:26  error  React Hook "useMemo" is called conditionally. React Hooks must be called in the exact same order in every component render. Did you accidentally call a React Hook after an early return?  react-hooks/rules-of-hooks
+  27:22  error  React Hook "useMemo" is called conditionally. React Hooks must be called in the exact same order in every component render. Did you accidentally call a React Hook after an early return?  react-hooks/rules-of-hooks
+  31:23  error  React Hook "useMemo" is called conditionally. React Hooks must be called in the exact same order in every component render. Did you accidentally call a React Hook after an early return?  react-hooks/rules-of-hooks
+
+C:\Users\3FARMATE ROBOTICS\Downloads\ESP-Drone-main\ESP-Drone-main\Firmware\esp-drone\drone-programming-platform\components\command-guide.tsx
+  116:26  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\Users\3FARMATE ROBOTICS\Downloads\ESP-Drone-main\ESP-Drone-main\Firmware\esp-drone\drone-programming-platform\components\command-library.tsx
+  45:26  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\Users\3FARMATE ROBOTICS\Downloads\ESP-Drone-main\ESP-Drone-main\Firmware\esp-drone\drone-programming-platform\components\landing\LandingPage.tsx
+  86:40  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\Users\3FARMATE ROBOTICS\Downloads\ESP-Drone-main\ESP-Drone-main\Firmware\esp-drone\drone-programming-platform\components\virtual-joysticks.tsx
+  211:8  warning  React Hook useEffect has a missing dependency: 'drawJoystick'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  217:8  warning  React Hook useEffect has a missing dependency: 'drawJoystick'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\3FARMATE ROBOTICS\Downloads\ESP-Drone-main\ESP-Drone-main\Firmware\esp-drone\drone-programming-platform\hooks\use-auth.tsx
+  43:8  warning  React Hook useEffect has missing dependencies: 'setStoreUser', 'supabase', and 'syncProgress'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+Γ£û 10 problems (6 errors, 4 warnings)
+

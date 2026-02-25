@@ -1,0 +1,8 @@
+﻿components/TeacherDashboard.tsx(366,85): error TS1127: Invalid character.
+components/TeacherDashboard.tsx(366,115): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+components/TeacherDashboard.tsx(366,116): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+components/TeacherDashboard.tsx(366,119): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+components/TeacherDashboard.tsx(404,170): error TS1127: Invalid character.
+components/TeacherDashboard.tsx(404,188): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+components/TeacherDashboard.tsx(404,189): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+components/TeacherDashboard.tsx(404,192): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?

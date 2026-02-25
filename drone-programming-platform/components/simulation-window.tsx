@@ -1,36 +1,49 @@
 "use client"
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber"
-import { OrbitControls, Grid } from "@react-three/drei"
-import { useRef, useEffect } from "react"
+import { OrbitControls, Grid, Float, ContactShadows, Environment } from "@react-three/drei"
+import { useRef, Suspense } from "react"
 import type { Mesh } from "three"
 import * as THREE from "three"
+import { useTheme } from "next-themes"
 
 // Drone Model Component
 function Drone({ position, rotation, isFlying }: { position: [number, number, number], rotation: [number, number, number], isFlying: boolean }) {
+    const groupRef = useRef<THREE.Group>(null);
+
+    useFrame((state) => {
+        if (groupRef.current && isFlying) {
+            // Subtle tilt when flying
+            groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 2) * 0.05;
+        }
+    });
+
     return (
-        <group position={position} rotation={rotation}>
-            {/* Body */}
-            <mesh>
-                <boxGeometry args={[0.2, 0.05, 0.1]} />
-                <meshStandardMaterial color="#333" />
-            </mesh>
+        <group position={position} rotation={rotation} ref={groupRef}>
+            <Float speed={isFlying ? 3 : 0} rotationIntensity={0.2} floatIntensity={isFlying ? 0.5 : 0}>
+                {/* Body - Sleek carbon fiber look */}
+                <mesh castShadow>
+                    <boxGeometry args={[0.25, 0.06, 0.12]} />
+                    <meshStandardMaterial color="#111" roughness={0.2} metalness={0.8} />
+                </mesh>
 
-            {/* Arms */}
-            <mesh rotation={[0, Math.PI / 4, 0]}>
-                <boxGeometry args={[0.4, 0.02, 0.02]} />
-                <meshStandardMaterial color="#666" />
-            </mesh>
-            <mesh rotation={[0, -Math.PI / 4, 0]}>
-                <boxGeometry args={[0.4, 0.02, 0.02]} />
-                <meshStandardMaterial color="#666" />
-            </mesh>
+                {/* Center Core Glow */}
+                <mesh position={[0, 0, 0.061]}>
+                    <planeGeometry args={[0.08, 0.02]} />
+                    <meshStandardMaterial color="#00ffff" emissive="#00ffff" emissiveIntensity={5} transparent opacity={0.8} />
+                </mesh>
 
-            {/* Propellers */}
-            <Propeller position={[0.14, 0.02, 0.14]} color="cyan" isSpinning={isFlying} />
-            <Propeller position={[-0.14, 0.02, 0.14]} color="cyan" isSpinning={isFlying} />
-            <Propeller position={[0.14, 0.02, -0.14]} color="red" isSpinning={isFlying} />
-            <Propeller position={[-0.14, 0.02, -0.14]} color="red" isSpinning={isFlying} />
+                {/* Arms - Detailed look */}
+                {[Math.PI / 4, -Math.PI / 4, 3 * Math.PI / 4, -3 * Math.PI / 4].map((angle, i) => (
+                    <group key={i} rotation={[0, angle, 0]}>
+                        <mesh position={[0.2, 0, 0]} castShadow>
+                            <boxGeometry args={[0.3, 0.02, 0.03]} />
+                            <meshStandardMaterial color="#222" roughness={0.3} metalness={0.7} />
+                        </mesh>
+                        <Propeller position={[0.3, 0.02, 0]} color={i < 2 ? "#3b82f6" : "#ef4444"} isSpinning={isFlying} />
+                    </group>
+                ))}
+            </Float>
         </group>
     )
 }
@@ -40,19 +53,26 @@ function Propeller({ position, color, isSpinning }: { position: [number, number,
 
     useFrame((state, delta) => {
         if (ref.current && isSpinning) {
-            ref.current.rotation.y += delta * 20
+            ref.current.rotation.y += delta * 40
         }
     })
 
     return (
-        <mesh ref={ref} position={position}>
-            <cylinderGeometry args={[0.08, 0.08, 0.01, 8]} />
-            <meshStandardMaterial color={color} opacity={isSpinning ? 0.6 : 0.3} transparent />
-        </mesh>
+        <group position={position}>
+            <mesh ref={ref}>
+                <cylinderGeometry args={[0.12, 0.12, 0.005, 16]} />
+                <meshStandardMaterial color={color} opacity={isSpinning ? 0.4 : 0.2} transparent side={THREE.DoubleSide} />
+            </mesh>
+            {/* Prop hub */}
+            <mesh position={[0, 0.01, 0]}>
+                <sphereGeometry args={[0.02, 8, 8]} />
+                <meshStandardMaterial color="#000" />
+            </mesh>
+        </group>
     )
 }
 
-// Camera Controller - follows drone but allows manual zoom/orbit
+// Camera Controller
 function CameraController({ target }: { target: [number, number, number] }) {
     const { camera } = useThree()
     const controlsRef = useRef<any>(null)
@@ -60,20 +80,12 @@ function CameraController({ target }: { target: [number, number, number] }) {
     useFrame(() => {
         if (controlsRef.current) {
             const dronePos = new THREE.Vector3(target[0], target[1], target[2])
+            const currentTarget = controlsRef.current.target.clone()
+            const delta = dronePos.clone().sub(currentTarget)
 
-            // 1. Move the OrbitControls target to look at the drone
-            const currentTarget = controlsRef.current.target as THREE.Vector3
-
-            // Calculate the delta (how much the target moved)
-            const delta = new THREE.Vector3().copy(dronePos).sub(currentTarget)
-
-            // Apply a fraction of that delta to the camera position to "chase"
-            // We use a small lerp factor for smooth following but we MUST move the camera
-            camera.position.add(delta)
-
-            // Update the target to be the drone
+            // Smoothly move camera with the drone
+            camera.position.add(delta.multiplyScalar(0.1))
             controlsRef.current.target.copy(dronePos)
-
             controlsRef.current.update()
         }
     })
@@ -83,9 +95,9 @@ function CameraController({ target }: { target: [number, number, number] }) {
             ref={controlsRef}
             makeDefault
             enableDamping
-            dampingFactor={0.1}
-            minDistance={1}
-            maxDistance={30}
+            dampingFactor={0.05}
+            minDistance={1.5}
+            maxDistance={20}
         />
     )
 }
@@ -97,35 +109,74 @@ interface SimulationWindowProps {
 
 export default function SimulationWindow({ position, yaw }: SimulationWindowProps) {
     const dronePos: [number, number, number] = [position.x, position.y, position.z]
+    const { resolvedTheme } = useTheme()
+
+    // Theme-dependent colors
+    const isDark = resolvedTheme === "dark"
+    const bgColor = isDark ? "#050507" : "#f0f9ff" // Dark space vs Light sky blue
+    const gridSectionColor = isDark ? "#3b82f6" : "#bae6fd"
+    const gridCellColor = isDark ? "#1e293b" : "#e0f2fe"
+    const ambientIntensity = isDark ? 1.5 : 2.5
 
     return (
-        <div className="w-full h-full bg-slate-950 rounded-lg overflow-hidden border border-border relative">
-            <Canvas camera={{ position: [3, 3, 3], fov: 50 }}>
-                <ambientLight intensity={0.5} />
-                <pointLight position={[10, 10, 10]} />
+        <div className={`w-full h-full relative overflow-hidden transition-colors duration-500 ${isDark ? "bg-[#050507]" : "bg-sky-50"}`}>
+            <Canvas shadows camera={{ position: [3, 3, 3], fov: 45 }} dpr={[1, 2]}>
+                <color attach="background" args={[bgColor]} />
 
-                {/* Environment */}
-                <Grid infiniteGrid sectionSize={1} fadeDistance={25} sectionColor="#4f4f4f" cellColor="#2f2f2f" />
-                <axesHelper args={[2]} />
+                <Suspense fallback={<mesh><boxGeometry args={[0.5, 0.5, 0.5]} /><meshStandardMaterial color="blue" wireframe /></mesh>}>
+                    <Environment preset={isDark ? "night" : "city"} />
 
-                {/* Drone */}
-                <Drone
-                    position={dronePos}
-                    rotation={[0, yaw * (Math.PI / 180), 0]}
-                    isFlying={position.y > 0.05}
-                />
+                    <ambientLight intensity={ambientIntensity} />
+                    <spotLight
+                        position={[10, 15, 10]}
+                        angle={0.25}
+                        penumbra={1}
+                        intensity={4}
+                        castShadow
+                        shadow-mapSize={[1024, 1024]}
+                    />
+                    <pointLight position={[-10, 5, -10]} intensity={2} color="#3b82f6" />
 
-                {/* Camera that follows drone */}
-                <CameraController target={dronePos} />
+                    {/* Grid & Environment */}
+                    <Grid
+                        infiniteGrid
+                        sectionSize={1}
+                        cellSize={0.1}
+                        fadeDistance={25}
+                        sectionColor={gridSectionColor}
+                        cellColor={gridCellColor}
+                        sectionThickness={1.5}
+                    />
+
+                    {/* Landing Pad */}
+                    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.01, 0]} receiveShadow>
+                        <circleGeometry args={[0.5, 32]} />
+                        <meshStandardMaterial color="#111" />
+                    </mesh>
+                    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.005, 0]}>
+                        <ringGeometry args={[0.45, 0.5, 32]} />
+                        <meshStandardMaterial color="#3b82f6" emissive="#3b82f6" emissiveIntensity={2} />
+                    </mesh>
+
+                    <ContactShadows
+                        position={[0, 0, 0]}
+                        opacity={0.8}
+                        scale={5}
+                        blur={2}
+                        far={2}
+                    />
+
+                    {/* Drone */}
+                    <Drone
+                        position={[position.x, position.y + 0.03, position.z]} // Tiny liftoff to see it better
+                        rotation={[0, -yaw * (Math.PI / 180), 0]}
+                        isFlying={position.y > 0.05}
+                    />
+
+                    {/* Camera */}
+                    <CameraController target={dronePos} />
+                </Suspense>
             </Canvas>
-
-            <div className="absolute top-4 right-4 bg-black/50 text-white p-2 text-xs rounded font-mono pointer-events-none">
-                <div>X: {position.x.toFixed(2)}m</div>
-                <div>Y: {position.y.toFixed(2)}m (Alt)</div>
-                <div>Z: {position.z.toFixed(2)}m</div>
-                <div>Yaw: {yaw.toFixed(1)}°</div>
-            </div>
         </div>
     )
 }
-

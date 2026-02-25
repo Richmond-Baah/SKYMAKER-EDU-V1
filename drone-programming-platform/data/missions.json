@@ -1,0 +1,166 @@
+[
+  {
+    "id": "mission_01",
+    "tier": "beginner",
+    "title": "First Flight",
+    "objective": "Make the drone take off and land safely.",
+    "estimatedTime": 12,
+    "starterCode": "# First Flight\ndrone.takeoff()\ndrone.land()\n",
+    "successCriteria": {
+      "requiredCommands": ["takeoff", "land"],
+      "minAltitude": 1.0,
+      "maxTime": 30
+    },
+    "hints": [
+      { "trigger": "no_takeoff", "message": "The drone needs to take off first! Try: drone.takeoff()" }
+    ],
+    "unlocks": ["mission_02"]
+  },
+  {
+    "id": "mission_02",
+    "tier": "beginner",
+    "title": "Forward Motion",
+    "objective": "Move forward 2 meters and return to start.",
+    "estimatedTime": 10,
+    "starterCode": "drone.takeoff()\ndrone.move_forward(2)\ndrone.move_backward(2)\ndrone.land()\n",
+    "successCriteria": {
+      "requiredCommands": ["takeoff", "move_forward", "move_backward", "land"],
+      "maxTime": 30
+    },
+    "hints": [
+      { "trigger": "no_takeoff", "message": "Add drone.takeoff() before movement commands." }
+    ],
+    "unlocks": ["mission_03"]
+  },
+  {
+    "id": "mission_03",
+    "tier": "beginner",
+    "title": "Climb & Descend",
+    "objective": "Climb to 3 meters, move forward, then descend and land.",
+    "estimatedTime": 12,
+    "starterCode": "drone.takeoff()\ndrone.move_up(3)\ndrone.move_forward(1)\ndrone.move_down(2)\ndrone.land()\n",
+    "successCriteria": {
+      "requiredCommands": ["move_up", "move_down"],
+      "minAltitude": 3.0,
+      "maxTime": 40
+    },
+    "hints": [
+      { "trigger": "alt_too_low", "message": "Try increasing the altitude with drone.move_up(<meters>)" }
+    ],
+    "unlocks": ["mission_04"]
+  },
+  {
+    "id": "mission_04",
+    "tier": "beginner",
+    "title": "Square Pattern",
+    "objective": "Fly a 2m × 2m square and return to start.",
+    "estimatedTime": 18,
+    "starterCode": "drone.takeoff()\n// Use move_forward and move_right to form a square\ndrone.move_forward(2)\ndrone.move_right(2)\ndrone.move_backward(2)\ndrone.move_left(2)\ndrone.land()\n",
+    "successCriteria": {
+      "requiredCommands": ["move_forward", "move_right", "move_backward", "move_left", "land"],
+      "positionAccuracy": 0.5,
+      "maxTime": 60
+    },
+    "hints": [
+      { "trigger": "out_of_bounds", "message": "Mission area is 10m x 10m — keep movements small." }
+    ],
+    "unlocks": ["mission_05"]
+  },
+  {
+    "id": "mission_05",
+    "tier": "beginner",
+    "title": "Precision Hover",
+    "objective": "Ascend to 2 meters, hold position, then land precisely.",
+    "estimatedTime": 8,
+    "starterCode": "drone.takeoff()\ndrone.move_up(2)\n// hold for a few seconds in simulation\ndrone.land()\n",
+    "successCriteria": {
+      "minAltitude": 2.0,
+      "landed": true,
+      "maxTime": 30
+    },
+    "hints": [
+      { "trigger": "no_landing", "message": "Don't forget to land the drone! Add drone.land() at the end." }
+    ],
+    "unlocks": ["mission_06"]
+  },
+  {
+    "id": "mission_06",
+    "tier": "beginner",
+    "title": "Back To Base",
+    "objective": "Move forward then return using move_backward and land safely.",
+    "estimatedTime": 9,
+    "starterCode": "drone.takeoff()\ndrone.move_forward(3)\ndrone.move_backward(3)\ndrone.land()\n",
+    "successCriteria": {
+      "requiredCommands": ["move_forward", "move_backward", "land"],
+      "maxTime": 30
+    },
+    "hints": [
+      { "trigger": "missing_return", "message": "Use drone.move_backward() to return to start." }
+    ],
+    "unlocks": ["mission_07"]
+  },
+  {
+    "id": "mission_07",
+    "tier": "beginner",
+    "title": "Precision Landing",
+    "objective": "Land within 0.5m of the start position after a short flight.",
+    "estimatedTime": 14,
+    "starterCode": "drone.takeoff()\ndrone.move_forward(1)\ndrone.move_right(1)\ndrone.move_left(1)\ndrone.move_backward(1)\ndrone.land()\n",
+    "successCriteria": {
+      "positionAccuracy": 0.5,
+      "landed": true
+    },
+    "hints": [
+      { "trigger": "drift", "message": "Try returning along the same path for best accuracy." }
+    ],
+    "unlocks": ["mission_08"]
+  },
+  {
+    "id": "mission_08",
+    "tier": "beginner",
+    "title": "Figure Eight",
+    "objective": "Combine lateral and forward movements to trace a figure‑eight pattern.",
+    "estimatedTime": 20,
+    "starterCode": "drone.takeoff()\ndrone.move_forward(2)\ndrone.move_right(1)\ndrone.move_backward(2)\ndrone.move_left(1)\ndrone.land()\n",
+    "successCriteria": {
+      "requiredCommands": ["move_forward", "move_right", "move_backward", "move_left", "land"],
+      "positionAccuracy": 1.0
+    },
+    "hints": [
+      { "trigger": "complex_path", "message": "Break the pattern into small steps and test often." }
+    ],
+    "unlocks": ["mission_09"]
+  },
+  {
+    "id": "mission_09",
+    "tier": "beginner",
+    "title": "Altitude Control",
+    "objective": "Practice ascending and descending smoothly between heights.",
+    "estimatedTime": 11,
+    "starterCode": "drone.takeoff()\ndrone.move_up(1.5)\ndrone.move_down(1)\ndrone.move_up(2)\ndrone.land()\n",
+    "successCriteria": {
+      "requiredCommands": ["move_up", "move_down", "land"],
+      "minAltitude": 1.5
+    },
+    "hints": [
+      { "trigger": "alt_mismatch", "message": "Check units: distances are in meters (e.g. 1.5)." }
+    ],
+    "unlocks": ["mission_10"]
+  },
+  {
+    "id": "mission_10",
+    "tier": "beginner",
+    "title": "Timed Run",
+    "objective": "Complete a short course within 20 seconds.",
+    "estimatedTime": 15,
+    "starterCode": "drone.takeoff()\ndrone.move_forward(2)\ndrone.move_right(1)\ndrone.move_back(1)\ndrone.land()\n",
+    "successCriteria": {
+      "maxTime": 20,
+      "landed": true
+    },
+    "hints": [
+      { "trigger": "slow_execution", "message": "Try minimizing pauses and redundant moves to finish faster." }
+    ],
+    "unlocks": []
+  }
+]

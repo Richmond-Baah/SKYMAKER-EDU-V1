@@ -1,0 +1,137 @@
+﻿
+> drone-programming-platform@0.1.0 build
+> next build
+
+   Γû▓ Next.js 14.1.0
+   - Environments: .env.local
+
+   Creating an optimized production build ...
+ Γ£ô Compiled successfully
+   Skipping validation of types
+   Linting ...
+   Collecting page data ...
+   Generating static pages (0/23) ...
+
+   Generating static pages (5/23) 
+
+   Generating static pages (11/23) 
+
+   Generating static pages (17/23) 
+
+ Γ£ô Generating static pages (23/23) 
+   Finalizing page optimization ...
+   Collecting build traces ...
+node.exe : Error: 
+UNKNOWN: unknown 
+error, open 
+'C:\Users\3FARMATE ROBO
+TICS\Downloads\ESP-Dron
+e-main\ESP-Drone-main\F
+irmware\esp-drone\drone
+-programming-platform\.
+next\server\pages\_docu
+ment.js.nft.json'
+At line:1 char:1
++ & "C:\Program 
+Files\nodejs/node.exe" 
+"C:\Program 
+Files\nodejs/node_mo 
+...
++ ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+~~
+    + CategoryInfo     
+         : NotSpecifi  
+  ed: (Error: UNKNOW   
+ N:...nt.js.nft.jso    
+n':String) [], Rem    
+oteException
+    + FullyQualifiedEr 
+   rorId : NativeComm  
+  andError
+ 
+    at async open (node
+:internal/fs/promises:6
+42:25)
+    at async 
+Object.writeFile (node:
+internal/fs/promises:12
+49:14)
+    at async 
+C:\Users\3FARMATE ROBOT
+ICS\Downloads\ESP-Drone
+-main\ESP-Drone-main\Fi
+rmware\esp-drone\drone-
+programming-platform\no
+de_modules\next\dist\bu
+ild\collect-build-trace
+s.js:424:17
+    at async 
+Promise.all (index 3)
+    at async 
+C:\Users\3FARMATE ROBOT
+ICS\Downloads\ESP-Drone
+-main\ESP-Drone-main\Fi
+rmware\esp-drone\drone-
+programming-platform\no
+de_modules\next\dist\bu
+ild\collect-build-trace
+s.js:386:13
+    at async 
+Span.traceAsyncFn 
+(C:\Users\3FARMATE ROBO
+TICS\Downloads\ESP-Dron
+e-main\ESP-Drone-main\F
+irmware\esp-drone\drone
+-programming-platform\n
+ode_modules\next\dist\t
+race\trace.js:151:20)
+    at async 
+collectBuildTraces 
+(C:\Users\3FARMATE ROBO
+TICS\Downloads\ESP-Dron
+e-main\ESP-Drone-main\F
+irmware\esp-drone\drone
+-programming-platform\n
+ode_modules\next\dist\b
+uild\collect-build-trac
+es.js:162:5)
+    at async 
+C:\Users\3FARMATE ROBOT
+ICS\Downloads\ESP-Drone
+-main\ESP-Drone-main\Fi
+rmware\esp-drone\drone-
+programming-platform\no
+de_modules\next\dist\bu
+ild\index.js:1928:13
+    at async 
+Span.traceAsyncFn 
+(C:\Users\3FARMATE ROBO
+TICS\Downloads\ESP-Dron
+e-main\ESP-Drone-main\F
+irmware\esp-drone\drone
+-programming-platform\n
+ode_modules\next\dist\t
+race\trace.js:151:20)
+    at async build 
+(C:\Users\3FARMATE ROBO
+TICS\Downloads\ESP-Dron
+e-main\ESP-Drone-main\F
+irmware\esp-drone\drone
+-programming-platform\n
+ode_modules\next\dist\b
+uild\index.js:374:9) {
+  errno: -4094,
+  code: 'UNKNOWN',
+  syscall: 'open',
+  path: 
+'C:\\Users\\3FARMATE RO
+BOTICS\\Downloads\\ESP-
+Drone-main\\ESP-Drone-m
+ain\\Firmware\\esp-dron
+e\\drone-programming-pl
+atform\\.next\\server\\
+pages\\_document.js.nft
+.json'
+}

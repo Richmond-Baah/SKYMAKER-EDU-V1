@@ -9,9 +9,19 @@ const DRONE_PORT = 2390;
 const CRTP_PORT_SETPOINT = 0x03;
 const CRTP_CHANNEL_SETPOINT = 0x00;
 
-// Reusing the socket across requests if possible (Next.js serverless nature might recreate it, but this is best effort)
-// For a robust implementation in a real server, we might want a dedicated worker, but for this educational platform:
-const socket = dgram.createSocket('udp4');
+// Use globalThis to maintain the socket across hot-reloads
+const globalControl = globalThis as unknown as {
+    socket: dgram.Socket | undefined;
+};
+
+if (!globalControl.socket) {
+    globalControl.socket = dgram.createSocket('udp4');
+    globalControl.socket.on('error', (err) => {
+        console.error('UDP Control socket error:', err);
+    });
+}
+
+const socket = globalControl.socket;
 
 function floatRef(val: number): Buffer {
     const buf = Buffer.alloc(4);

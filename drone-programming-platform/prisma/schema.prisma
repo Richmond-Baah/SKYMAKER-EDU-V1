@@ -1,0 +1,151 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User: Student or teacher account
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  username  String   @unique
+  role      String   @default("student") // 'student' | 'teacher' | 'admin'
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relationships
+  progress  Progress[]
+  badges    UserBadge[]
+  submissions Submission[]
+
+  @@index([email])
+}
+
+// Mission: Core mission data
+model Mission {
+  id                String   @id
+  tier              String   // 'beginner' | 'intermediate' | 'advanced'
+  title             String
+  objective         String
+  estimatedTime     Int      // minutes
+  starterCode       String
+  successCriteria   Json     // SuccessCriteria type
+  hints             Json     // MissionHint[] type
+  unlocks           String[] // mission IDs that unlock after completion
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  // Relationships
+  progress  Progress[]
+
+  @@index([tier])
+}
+
+// Progress: User's progress on a mission
+model Progress {
+  id            String   @id @default(cuid())
+  userId        String
+  missionId     String
+  code          String?  // Latest code submission
+  score         Int?     // Latest score (0-100)
+  completed     Boolean  @default(false)
+  timeSpent     Int      @default(0) // seconds
+  attemptNumber Int      @default(1)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Version history
+  codeHistory   CodeVersion[]
+  
+  // Relationships
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  mission Mission @relation(fields: [missionId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, missionId])
+  @@index([userId])
+  @@index([missionId])
+}
+
+// CodeVersion: Track code changes over time
+model CodeVersion {
+  id         String   @id @default(cuid())
+  progressId String
+  code       String
+  score      Int?
+  createdAt  DateTime @default(now())
+
+  progress Progress @relation(fields: [progressId], references: [id], onDelete: Cascade)
+
+  @@index([progressId])
+}
+
+// UserBadge: Track earned badges per user
+model UserBadge {
+  userId   String
+  badgeId  String
+  earnedAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, badgeId])
+  @@index([userId])
+}
+
+// Assignment: Group of missions assigned to students by teachers
+model Assignment {
+  id        String   @id @default(cuid())
+  code      String   @unique
+  title     String?
+  missions  String[] // JSON store of mission IDs
+  deadline  DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relationship to submissions
+  submissions Submission[]
+
+  @@index([code])
+}
+
+// Submission: Student's code submission for a mission within an assignment
+model Submission {
+  id           String   @id @default(cuid())
+  assignmentId String
+  userId       String   // Link to User
+  studentId    String   // Legacy: Anonymous or user ID (for MVP, can be app-generated)
+  missionId    String   // Which mission was attempted
+  code         String   // Student's code
+  flightData   Json?    // Recorded flight/telemetry data
+  grade        Grade?   // One-to-one grade result
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  assignment Assignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([assignmentId])
+  @@index([studentId])
+  @@index([missionId])
+  @@index([userId])
+}
+
+// Grade: Automated grading result for a submission
+model Grade {
+  id           String   @id @default(cuid())
+  submissionId String   @unique
+  score        Int      // 0-100
+  passed       Boolean  // true if score >= threshold
+  feedback     String   // Structured feedback text
+  breakdown    Json     // Detailed grading breakdown (from gradeMission)
+  gradedAt     DateTime @default(now())
+
+  submission Submission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+
+  @@index([submissionId])
+}

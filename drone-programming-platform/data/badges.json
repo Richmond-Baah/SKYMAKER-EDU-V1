@@ -1,0 +1,75 @@
+[
+  {
+    "id": "first_flight",
+    "name": "First Flight",
+    "description": "Complete Mission 1: Take off and land safely",
+    "icon": "🎯",
+    "tier": "beginner",
+    "unlockedAt": 0,
+    "missionId": "mission_01"
+  },
+  {
+    "id": "pattern_master",
+    "name": "Pattern Master",
+    "description": "Complete all geometry missions (1-5)",
+    "icon": "🎭",
+    "tier": "beginner",
+    "unlockedAt": 4,
+    "missions": ["mission_01", "mission_02", "mission_03", "mission_04", "mission_05"]
+  },
+  {
+    "id": "autonomy_level_1",
+    "name": "Autonomy Level 1",
+    "description": "Complete beginner tier with >80% average score",
+    "icon": "🚁",
+    "tier": "beginner",
+    "unlockedAt": 9,
+    "requirement": "avg_score_80"
+  },
+  {
+    "id": "speed_racer",
+    "name": "Speed Racer",
+    "description": "Complete Mission 10 (Timed Run) within 20 seconds",
+    "icon": "⚡",
+    "tier": "beginner",
+    "unlockedAt": 9,
+    "missionId": "mission_10",
+    "requirement": "time_under_20"
+  },
+  {
+    "id": "code_quality",
+    "name": "Code Quality",
+    "description": "Write code using loops and variables",
+    "icon": "✨",
+    "tier": "beginner",
+    "unlockedAt": 5,
+    "requirement": "uses_loops_and_vars"
+  },
+  {
+    "id": "instructor",
+    "name": "Instructor",
+    "description": "Create and publish 5 community missions",
+    "icon": "👨‍🏫",
+    "tier": "advanced",
+    "unlockedAt": 50,
+    "requirement": "published_5_missions"
+  },
+  {
+    "id": "swarm_master",
+    "name": "Swarm Master",
+    "description": "Successfully coordinate 4+ drones in a formation",
+    "icon": "🐝",
+    "tier": "advanced",
+    "unlockedAt": 25,
+    "requirement": "swarm_4_drones"
+  },
+  {
+    "id": "safety_first",
+    "name": "Safety First",
+    "description": "Complete 10 missions with zero safety warnings",
+    "icon": "🛡️",
+    "tier": "intermediate",
+    "unlockedAt": 10,
+    "requirement": "zero_warnings_10"
+  }
+]
