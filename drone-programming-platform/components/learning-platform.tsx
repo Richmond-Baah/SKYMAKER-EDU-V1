@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react"
 import Link from "next/link"
+import { useSearchParams } from "next/navigation"
 import { useTheme } from "next-themes"
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable"
 import { LessonPanel } from "@/components/lesson-panel"
@@ -30,11 +31,11 @@ import type { MissionState } from "@/types/mission"
 import { AuthButton } from "@/components/AuthButton"
 
 export function LearningPlatform() {
-    const { currentLessonId, code: templateCode, completedLessons, setLesson } =
-        useDroneStore()
+    const { currentLessonId, code: templateCode, completedLessons, setLesson } = useDroneStore()
     const { isConnected } = useDroneLink()
     const { resolvedTheme, setTheme } = useTheme()
     const [mounted, setMounted] = useState(false)
+    const searchParams = useSearchParams()
 
     // Mission flow state
     const [missionState, setMissionState] = useState<MissionState>("intro")
@@ -46,7 +47,13 @@ export function LearningPlatform() {
 
     useEffect(() => {
         setMounted(true)
-    }, [])
+
+        // Auto-load mission from URL
+        const missionParam = searchParams.get("mission")
+        if (missionParam && missionParam !== currentLessonId) {
+            setLesson(missionParam)
+        }
+    }, [searchParams, currentLessonId, setLesson])
 
     // Reset to intro when the lesson changes
     useEffect(() => {
