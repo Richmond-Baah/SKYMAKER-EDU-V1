@@ -1571,6 +1571,9 @@ video {
 .cursor-text {
   cursor: text;
 }
+.cursor-not-allowed {
+  cursor: not-allowed;
+}
 .touch-none {
   touch-action: none;
 }

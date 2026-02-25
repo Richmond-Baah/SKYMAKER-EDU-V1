@@ -2,14 +2,31 @@
 
 import React from 'react'
 import Link from 'next/link'
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card'
+import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Lock } from 'lucide-react'
+import { Lock, CheckCircle } from 'lucide-react'
 
 import { Mission } from '@/types/mission'
 import { useDroneStore } from '@/lib/store'
 import { beginnerLessons } from '@/lib/lessons'
+
+/**
+ * Maps mission_0X IDs from missions.json to the lesson IDs used in beginnerLessons.
+ * This keeps the two data sources in sync.
+ */
+const missionToLessonMap: Record<string, string> = {
+  mission_01: 'takeoff-101',
+  mission_02: 'forward-motion',
+  mission_03: 'climb-ext',
+  mission_04: 'square-dance',
+  mission_05: 'precision-hover',
+  mission_06: 'back-to-base',
+  mission_07: 'precision-landing',
+  mission_08: 'figure-eight',
+  mission_09: 'altitude-control',
+  mission_10: 'stunt-pilot',
+}
 
 interface MissionCardProps {
   mission: Mission
@@ -18,17 +35,20 @@ interface MissionCardProps {
 export function MissionCard({ mission }: MissionCardProps) {
   const { completedLessons } = useDroneStore()
 
-  // Find the corresponding lesson to get prerequisites
-  const lessonDef = beginnerLessons.find(l => l.id === mission.id)
+  // Resolve the lesson id for this mission card
+  const lessonId = missionToLessonMap[mission.id] ?? mission.id
+  const lessonDef = beginnerLessons.find(l => l.id === lessonId)
 
-  // A mission is locked if any of its prerequisites are not in completedLessons,
-  // EXCEPT for the very first mission (takeoff-101) which is always unlocked.
+  // A mission is locked if any prerequisites are not completed,
+  // EXCEPT for the very first mission which is always unlocked.
   const isLocked = lessonDef && lessonDef.id !== beginnerLessons[0].id
     ? lessonDef.prerequisites.some(p => !completedLessons.includes(p))
     : false
 
+  const isCompleted = completedLessons.includes(lessonId)
+
   return (
-    <Card className="bg-card border-border hover:border-blue-500/20 transition-all hover:scale-[1.01] shadow-sm">
+    <Card className={`bg-card border-border transition-all shadow-sm ${isLocked ? 'opacity-60' : 'hover:border-blue-500/20 hover:scale-[1.01]'}`}>
       <CardContent className="pt-6">
         <div className="flex items-start justify-between gap-4">
           <div className="flex-1">
@@ -36,6 +56,7 @@ export function MissionCard({ mission }: MissionCardProps) {
             <h3 className="text-lg font-bold text-foreground leading-tight mb-2 flex items-center gap-2">
               {mission.title}
               {isLocked && <Lock className="w-4 h-4 text-muted-foreground/60" />}
+              {isCompleted && <CheckCircle className="w-4 h-4 text-emerald-500" />}
             </h3>
             <p className="text-sm text-muted-foreground line-clamp-2">{mission.objective}</p>
           </div>
@@ -58,15 +79,15 @@ export function MissionCard({ mission }: MissionCardProps) {
 
           {isLocked ? (
             <div className="flex-[2]">
-              <Button size="sm" disabled className="w-full bg-muted text-muted-foreground text-xs font-bold shadow-none">
+              <Button size="sm" disabled className="w-full bg-muted text-muted-foreground text-xs font-bold shadow-none cursor-not-allowed">
                 <Lock className="w-3.5 h-3.5 mr-2" />
                 LOCKED
               </Button>
             </div>
           ) : (
-            <Link href={`/learn?mission=${mission.id}`} className="flex-[2]">
+            <Link href={`/learn?mission=${lessonId}`} className="flex-[2]">
               <Button size="sm" className="w-full bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold shadow-lg shadow-blue-500/20">
-                START MISSION
+                {isCompleted ? 'REPLAY MISSION' : 'START MISSION'}
               </Button>
             </Link>
           )}
