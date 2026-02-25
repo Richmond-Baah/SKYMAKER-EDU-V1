@@ -12,7 +12,7 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-sans' })
 export const metadata: Metadata = {
   title: 'SkyMaker EDU | Drone Programming Platform',
   description: 'The premier educational platform for drone coding and robotics.',
-  generator: 'SkyMaker',
+  generator: 'VhimLabs',
   icons: {
     icon: [
       {

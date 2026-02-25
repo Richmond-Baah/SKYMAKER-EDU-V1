@@ -1,7 +1,8 @@
 {
-  "/page": "app/page.js",
+  "/not-found": "app/not-found.js",
+  "/auth/signup/page": "app/auth/signup/page.js",
   "/learn/page": "app/learn/page.js",
-  "/api/drone/telemetry/route": "app/api/drone/telemetry/route.js",
-  "/missions/page": "app/missions/page.js",
-  "/dashboard/page": "app/dashboard/page.js"
+  "/auth/login/page": "app/auth/login/page.js",
+  "/classroom/page": "app/classroom/page.js",
+  "/page": "app/page.js"
 }

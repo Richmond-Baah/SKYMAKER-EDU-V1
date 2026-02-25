@@ -125,7 +125,7 @@ export function LearningPlatform() {
                                 SKYMAKER <span className="text-blue-500">EDU</span>
                             </h1>
                             <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-[0.2em] mt-0.5">
-                                Robotics Platform
+                                by VhimLabs
                             </span>
                         </div>
                     </Link>
