@@ -42,7 +42,7 @@ export function MissionCard({ mission }: MissionCardProps) {
               DETAILS
             </Button>
           </Link>
-          <Link href="/" className="flex-[2]">
+          <Link href="/learn" className="flex-[2]">
             <Button size="sm" className="w-full bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold shadow-lg shadow-blue-500/20">
               START MISSION
             </Button>
