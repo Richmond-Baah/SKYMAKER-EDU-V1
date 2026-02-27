@@ -4,7 +4,7 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
-import { ArrowRight, Code, Cpu, Rocket, Shield, Zap, Star, Award, TrendingUp, User } from 'lucide-react'
+import { ArrowRight, Code, Cpu, Rocket, Shield, Zap, Star, Award, TrendingUp, User, ChevronDown } from 'lucide-react'
 import { HeroSection } from '@/components/hero/HeroSection'
 import { AuthButton } from '@/components/AuthButton'
 
@@ -43,25 +43,25 @@ export function LandingPage() {
                 <section className="py-32 relative">
                     <div className="container mx-auto px-4">
                         <div className="text-center mb-20 space-y-4">
-                            <h2 className="text-4xl md:text-5xl font-black tracking-tighter">Engineered for Success</h2>
-                            <p className="text-gray-400 max-w-2xl mx-auto font-medium text-lg">We provide the tools, you provide the curiosity. Everything is designed to be plug-and-play-and-code.</p>
+                            <h2 className="text-4xl md:text-5xl font-black tracking-tighter">Everything You Need to Get Off the Ground</h2>
+                            <p className="text-gray-400 max-w-2xl mx-auto font-medium text-lg">We&apos;ve done all the hard work behind the scenes so you don&apos;t have to. Just open the box, plug in, and your first mission is waiting. No experience needed — just bring your excitement.</p>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                             <FeatureCard
                                 icon={<Code className="w-8 h-8 text-blue-400" />}
-                                title="Python Integration"
-                                desc="Write professional Python scripts to control your drone with real-time flight telemetry."
+                                title="Your Code, Your Rules"
+                                desc="Tell your drone to spin, climb, hover, or zoom — all with your own Python code. You're the pilot and the programmer."
                             />
                             <FeatureCard
                                 icon={<Zap className="w-8 h-8 text-yellow-400" />}
-                                title="Instant Sync"
-                                desc="Write code and see it run on the hardware instantly via Wi-Fi telemetry and control."
+                                title="From Screen to Sky in Seconds"
+                                desc="Press run and watch your drone bring your code to life right in front of you. Every mission is a little \u201cwow\u201d moment waiting to happen."
                             />
                             <FeatureCard
                                 icon={<Shield className="w-8 h-8 text-emerald-400" />}
-                                title="Sim-to-Real"
-                                desc="A physics-based simulator ensures your code works before you ever risk a crash."
+                                title="Practice Safe, Then Go for It"
+                                desc="Not ready to fly for real yet? No worries. Test your code in our flight simulator first, then launch your drone knowing you're completely ready."
                             />
                         </div>
                     </div>
@@ -79,11 +79,11 @@ export function LandingPage() {
                                     Professional Growth
                                 </div>
                                 <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-none">
-                                    GAMIFIED <br />
-                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">TO THE CORE</span>
+                                    THE MORE YOU FLY, <br />
+                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">THE MORE YOU GROW 🚀</span>
                                 </h2>
                                 <p className="text-xl text-gray-400 font-medium leading-relaxed">
-                                    Don&apos;t just learn—evolve. Our gamified profile system tracks every line of code and every successful flight, turning your learning journey into an achievement-packed career path.
+                                    Every mission you complete and every line of code you write makes you better. Earn cool badges, level up your pilot profile, and track your skills as you go from total beginner to confident drone builder &mdash; one fun challenge at a time.
                                 </p>
 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4">
@@ -92,14 +92,14 @@ export function LandingPage() {
                                             <TrendingUp className="w-5 h-5 text-purple-400" />
                                         </div>
                                         <h4 className="text-lg font-black">Skill Radar Tracking</h4>
-                                        <p className="text-sm text-gray-500 font-medium">Visualize your growth across 8 core drone pilot skills, from stability to creative logic.</p>
+                                        <p className="text-sm text-gray-500 font-medium">See exactly how you&apos;re growing across 8 key pilot skills. The better you get, the more your radar lights up.</p>
                                     </div>
                                     <div className="space-y-2 p-6 rounded-3xl bg-white/[0.02] border border-white/5 backdrop-blur-sm shadow-sm group hover:border-purple-500/30 transition-colors">
                                         <div className="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                                             <Award className="w-5 h-5 text-purple-400" />
                                         </div>
                                         <h4 className="text-lg font-black">Badge Rewards</h4>
-                                        <p className="text-sm text-gray-500 font-medium">Unlock 20+ specialized badges as you master precision flight and complex autonomous missions.</p>
+                                        <p className="text-sm text-gray-500 font-medium">Unlock 20+ badges as you complete missions and nail new tricks. Show them off and let your progress do the talking.</p>
                                     </div>
                                 </div>
                             </div>
@@ -154,15 +154,51 @@ export function LandingPage() {
                     </div>
                 </section>
 
-                {/* ─── CTA ───────────────────────────────────────────── */}
+                {/* ─── FAQ Section ────────────────────────────────────────── */}
+                <section className="py-32 relative border-t border-white/5">
+                    <div className="container mx-auto px-4">
+                        <div className="text-center mb-20 space-y-4">
+                            <h2 className="text-4xl md:text-5xl font-black tracking-tighter">Frequently Asked Questions</h2>
+                            <p className="text-gray-400 max-w-2xl mx-auto font-medium text-lg">Got questions? We&apos;ve got answers.</p>
+                        </div>
+                        <div className="max-w-3xl mx-auto space-y-4">
+                            <FaqItem
+                                question="Do I need any coding experience to get started?"
+                                answer="Not at all! SkyMaker is built for complete beginners. We walk you through everything step by step, so even if you've never written a single line of code before, you'll be flying in no time."
+                            />
+                            <FaqItem
+                                question="What age is SkyMaker for?"
+                                answer="If you're curious and love making things, you're the right age. SkyMaker works great for kids from around 10 years old all the way up to adults who just want to have fun building and flying drones."
+                            />
+                            <FaqItem
+                                question="What's included when I sign up?"
+                                answer="You get full access to our mission library, the flight simulator, and your personal pilot profile right away. If you order the SkyMaker Core S3 kit, everything you need to build and fly your drone is included in the box."
+                            />
+                            <FaqItem
+                                question="Do I need to buy the drone kit to use SkyMaker?"
+                                answer="Nope! You can explore the platform, try the simulator, and start learning Python completely free. When you're ready to fly for real, that's when you grab the kit."
+                            />
+                            <FaqItem
+                                question="Is it safe?"
+                                answer="Absolutely. Our simulator lets you practice as much as you want before you ever touch the real drone. And the SkyMaker Core S3 is designed with beginners in mind — safe, sturdy, and built to handle a few bumpy landings."
+                            />
+                            <FaqItem
+                                question="What if I get stuck?"
+                                answer="No one flies alone here. Our community on Discord is full of fellow builders who are happy to help, and our mission guides are designed to make sure you always know what to do next."
+                            />
+                        </div>
+                    </div>
+                </section>
+
+                {/* ─── CTA ───────────────────────────────────────────────── */}
                 <section className="py-32 bg-gradient-to-b from-transparent to-blue-900/10 border-t border-white/5">
                     <div className="container mx-auto px-4 text-center">
                         <div className="max-w-4xl mx-auto space-y-12">
-                            <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-none">Ready to Build Your First Drone?</h2>
-                            <p className="text-xl text-gray-400 font-medium">Join thousands of students and engineers mastering robotics today.</p>
+                            <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-none">Your Drone is Waiting. Are You Ready? ✈️</h2>
+                            <p className="text-xl text-gray-400 font-medium">Thousands of young builders and hobbyists have already taken their first flight. Now it&apos;s your turn &mdash; and it won&apos;t cost you a thing to start.</p>
                             <Link href="/learn">
                                 <Button size="lg" className="h-20 px-12 rounded-3xl text-2xl font-black bg-white text-black hover:bg-gray-100 shadow-2xl hover:scale-105 transition-all focus:ring-4 focus:ring-blue-500/50">
-                                    Launch Platform Free
+                                    Start Flying Free Today
                                 </Button>
                             </Link>
                         </div>
@@ -199,6 +235,24 @@ function FeatureCard({ icon, title, desc }: { icon: React.ReactNode, title: stri
             </div>
             <h3 className="text-2xl font-black mb-3 tracking-tight">{title}</h3>
             <p className="text-gray-500 font-medium leading-relaxed">{desc}</p>
+        </div>
+    )
+}
+
+function FaqItem({ question, answer }: { question: string; answer: string }) {
+    const [isOpen, setIsOpen] = React.useState(false)
+    return (
+        <div className="rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-sm overflow-hidden transition-colors hover:border-blue-500/20">
+            <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="w-full flex items-center justify-between p-6 text-left gap-4 focus:outline-none focus:ring-2 focus:ring-blue-500/50 rounded-2xl"
+            >
+                <span className="text-lg font-bold">{question}</span>
+                <ChevronDown className={`w-5 h-5 text-gray-400 shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
+            </button>
+            <div className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+                <p className="px-6 pb-6 text-gray-400 font-medium leading-relaxed">{answer}</p>
+            </div>
         </div>
     )
 }

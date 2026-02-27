@@ -87,16 +87,16 @@ export function HeroSection() {
                             <div className="flex gap-8 items-center justify-center lg:justify-start">
                                 <div>
                                     <p className="text-3xl font-black tabular-nums">2.4k+</p>
-                                    <p className="text-[10px] uppercase font-bold tracking-widest text-gray-500">Active Students</p>
+                                    <p className="text-[10px] uppercase font-bold tracking-widest text-gray-500">Builders and Counting</p>
                                 </div>
                                 <div className="w-px h-8 bg-white/10" />
                                 <div>
                                     <p className="text-3xl font-black tabular-nums">50+</p>
-                                    <p className="text-[10px] uppercase font-bold tracking-widest text-gray-500">Missions Ready</p>
+                                    <p className="text-[10px] uppercase font-bold tracking-widest text-gray-500">Missions Ready to Launch</p>
                                 </div>
                             </div>
                             <p className="text-[10px] text-gray-600 font-bold uppercase tracking-widest mt-4">
-                                From Kenya to California, students are building the future
+                                From bedrooms to backyards, young makers all over the world are already flying. Come join them.
                             </p>
                         </div>
                     </div>
