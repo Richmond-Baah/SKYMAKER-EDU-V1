@@ -27,8 +27,8 @@ export function HeroSection() {
             className="relative min-h-screen flex flex-col justify-center items-center pt-20 px-4 overflow-hidden"
         >
             {/* Background Ambient Glows */}
-            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/10 blur-[180px] rounded-full -translate-y-1/2 translate-x-1/2" />
-            <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-purple-600/10 blur-[180px] rounded-full translate-y-1/2 -translate-x-1/2" />
+            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/10 blur-[180px] rounded-full -translate-y-1/2 translate-x-1/2 animate-pulse-slow" />
+            <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-indigo-600/10 blur-[180px] rounded-full translate-y-1/2 -translate-x-1/2 animate-pulse-slow" style={{ animationDelay: '2s' }} />
 
             <div className="container mx-auto z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
@@ -42,7 +42,7 @@ export function HeroSection() {
 
                         <h1 className="text-4xl md:text-6xl lg:text-8xl font-black tracking-tighter leading-[0.9] animate-in fade-in slide-in-from-left-8 duration-700 delay-100">
                             THE FUTURE <br />
-                            OF <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">FLIGHT</span>
+                            OF <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-indigo-400 drop-shadow-[0_0_25px_rgba(56,189,248,0.3)]">FLIGHT</span>
                         </h1>
 
                         <p className="text-lg md:text-xl text-gray-400 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium animate-in fade-in slide-in-from-left-8 duration-700 delay-200">
@@ -53,9 +53,10 @@ export function HeroSection() {
                             <Button
                                 onClick={() => handleCtaClick('get_started_clicked', '/learn')}
                                 size="lg"
-                                className="w-full sm:w-auto h-16 px-8 rounded-2xl text-lg font-black bg-blue-600 hover:bg-blue-700 shadow-xl shadow-blue-500/30 gap-2 transition-all hover:scale-105 active:scale-95 focus:ring-4 focus:ring-blue-500/50 focus:outline-none"
+                                className="relative overflow-hidden w-full sm:w-auto h-16 px-8 rounded-2xl text-lg font-black bg-blue-600 hover:bg-blue-500 shadow-[0_0_40px_-10px_rgba(37,99,235,0.5)] gap-2 transition-all hover:scale-105 active:scale-95 focus:ring-4 focus:ring-blue-500/50 focus:outline-none group"
                             >
-                                Get Started <ArrowRight className="w-5 h-5" />
+                                <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-[150%] group-hover:animate-[shimmer_1.5s_infinite]" />
+                                <span className="relative z-10 flex items-center gap-2">Get Started <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" /></span>
                             </Button>
 
                             <Button
@@ -104,7 +105,7 @@ export function HeroSection() {
                     {/* Image Content - Order 1 on mobile (shows first) */}
                     <div className="relative group animate-in fade-in zoom-in-95 duration-1000 delay-400 order-1 lg:order-2">
                         {/* Image Showcase with Glass Frame */}
-                        <div className="relative aspect-square w-full max-w-[550px] mx-auto rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl">
+                        <div className="relative aspect-square w-full max-w-[550px] mx-auto rounded-[3rem] overflow-hidden border border-white/10 shadow-[0_0_50px_rgba(59,130,246,0.15)] animate-float">
                             <Image
                                 src="/drone.png"
                                 alt="SkyMaker Core S3 educational drone kit showing exposed circuit board, four propellers, and development hardware ready for programming"

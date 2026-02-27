@@ -10,9 +10,13 @@ import { AuthButton } from '@/components/AuthButton'
 
 export function LandingPage() {
     return (
-        <div className="flex flex-col min-h-screen bg-[#050505] text-white selection:bg-blue-500/30 overflow-x-hidden">
+        <div className="flex flex-col min-h-screen bg-[#050505] text-white selection:bg-blue-500/30 overflow-x-hidden relative">
+            {/* ─── Animated Grid Background ──────────────────────── */}
+            <div className="fixed inset-0 z-0 bg-grid-pattern opacity-30 select-none pointer-events-none" />
+            <div className="fixed inset-0 z-0 bg-radial-glow select-none pointer-events-none" />
+
             {/* ─── Premium Navigation ────────────────────────────── */}
-            <header className="fixed top-0 left-0 right-0 h-20 flex items-center px-6 z-50 backdrop-blur-md border-b border-white/5 bg-black/20">
+            <header className="fixed top-0 left-0 right-0 h-20 flex items-center px-6 z-50 backdrop-blur-md border-b border-white/5 bg-black/40">
                 <nav aria-label="Main navigation" className="container mx-auto flex justify-between items-center">
                     <div className="flex items-center gap-3">
                         <div className="w-10 h-10 bg-gradient-to-tr from-blue-600 to-cyan-400 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20">
@@ -36,7 +40,7 @@ export function LandingPage() {
             </header>
 
             {/* ─── Hero Section ─────────────────────────────────── */}
-            <main aria-label="Main content">
+            <main aria-label="Main content" className="relative z-10">
                 <HeroSection />
 
                 {/* ─── Features Grid ─────────────────────────────────── */}
@@ -68,8 +72,8 @@ export function LandingPage() {
                 </section>
 
                 {/* ─── Gamification Section ─────────────────────── */}
-                <section className="py-32 relative overflow-hidden bg-black/50">
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-blue-600/5 blur-[200px] rounded-full pointer-events-none" />
+                <section className="py-32 relative overflow-hidden bg-black/40 border-y border-white/5">
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-purple-600/10 blur-[200px] rounded-full pointer-events-none animate-pulse-slow" />
 
                     <div className="container mx-auto px-4 relative z-10">
                         <div className="flex flex-col lg:flex-row gap-16 items-center">
@@ -227,14 +231,19 @@ export function LandingPage() {
 function FeatureCard({ icon, title, desc }: { icon: React.ReactNode, title: string, desc: string }) {
     return (
         <div
-            className="p-10 rounded-[2.5rem] bg-white/[0.03] border border-white/10 backdrop-blur-2xl hover:bg-white/[0.06] hover:border-blue-500/30 transition-all duration-500 group focus-within:ring-4 focus-within:ring-blue-500/30 outline-none"
+            className="relative p-10 rounded-[2.5rem] bg-white/[0.03] border border-white/5 backdrop-blur-3xl hover:bg-white/[0.06] hover:border-blue-500/40 transition-all duration-500 group focus-within:ring-4 focus-within:ring-blue-500/30 outline-none hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(59,130,246,0.15)] overflow-hidden"
             tabIndex={0}
         >
-            <div className="mb-6 w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center group-hover:scale-110 group-hover:bg-blue-500/10 transition-all duration-500">
-                {icon}
+            {/* Hover Glow Background */}
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+            <div className="relative z-10">
+                <div className="mb-6 w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center group-hover:scale-110 group-hover:bg-blue-500/10 transition-all duration-500 shadow-inner border border-white/5 group-hover:border-blue-500/20 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.3)]">
+                    {icon}
+                </div>
+                <h3 className="text-2xl font-black mb-3 tracking-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-blue-200 transition-colors">{title}</h3>
+                <p className="text-gray-400 group-hover:text-gray-300 font-medium leading-relaxed transition-colors">{desc}</p>
             </div>
-            <h3 className="text-2xl font-black mb-3 tracking-tight">{title}</h3>
-            <p className="text-gray-500 font-medium leading-relaxed">{desc}</p>
         </div>
     )
 }
