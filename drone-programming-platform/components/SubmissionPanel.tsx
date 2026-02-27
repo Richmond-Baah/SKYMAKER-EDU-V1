@@ -124,7 +124,7 @@ export function SubmissionPanel() {
                 value={state.assignmentCode}
                 onChange={e => setState(s => ({ ...s, assignmentCode: e.target.value.toUpperCase() }))}
                 disabled={missions.length > 0}
-                className="font-mono bg-background text-foreground border-input"
+                className="font-mono bg-background text-foreground border-2 border-slate-300 dark:border-slate-700"
               />
               <Button onClick={handleLoadAssignment} disabled={loadingMissions || missions.length > 0}>
                 {loadingMissions ? 'Loading...' : 'Load'}
@@ -151,7 +151,7 @@ export function SubmissionPanel() {
                 <select
                   value={state.missionId}
                   onChange={e => setState(s => ({ ...s, missionId: e.target.value }))}
-                  className="w-full px-3 py-2 bg-background border border-input rounded text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                  className="w-full px-3 py-2 bg-background border-2 border-slate-300 dark:border-slate-700 rounded text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                 >
                   {missions.map(m => (
                     <option key={m} value={m}>
@@ -167,7 +167,7 @@ export function SubmissionPanel() {
                   placeholder="Paste your Python code here..."
                   value={state.code}
                   onChange={e => setState(s => ({ ...s, code: e.target.value }))}
-                  className="font-mono h-32 bg-background text-foreground border-input"
+                  className="font-mono h-32 bg-background text-foreground border-2 border-slate-300 dark:border-slate-700"
                 />
               </div>
 
@@ -177,7 +177,7 @@ export function SubmissionPanel() {
                   placeholder='{"altitude": 1.5, "roll": 0.1}'
                   value={state.flightData}
                   onChange={e => setState(s => ({ ...s, flightData: e.target.value }))}
-                  className="font-mono h-16 bg-background text-foreground border-input"
+                  className="font-mono h-16 bg-background text-foreground border-2 border-slate-300 dark:border-slate-700"
                 />
               </div>
 
