@@ -1,5 +1,5 @@
 export const heroVariants = {
-    current: "Build a real drone. Code it in Python. Fly it yourself. SkyMaker is the first integrated platform that combines professional programming with high-end drone hardware — so you can go from curious beginner to confident pilot-programmer in minutes. Tell your drone to spin, climb, hover, or zoom, all with your own code. SkyMaker is where curious minds come to make things that actually fly.",
+    current: "Build your first drone. Code it in Python. Watch it fly.\n\nSkyMaker makes learning simple by combining real drone hardware with easy programming. Write a few lines of code — and see your drone spin, climb, hover, and zoom.\n\nStart curious. Fly confident.",
 
     variantA: "Learn to code by building real flying drones. Start in simulation, graduate to hardware. No experience needed.",
 
